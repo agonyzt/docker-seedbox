@@ -7,7 +7,7 @@ function filebotize {
 function transcode {
 	ffprobe "$1" 2>&1 | grep Stream | grep Video | grep h264 && VIDEO_CODEC="copy" || VIDEO_CODEC="h264"
 	ffprobe "$1" 2>&1 | grep Stream | grep Audio | egrep "(ac3|aac)" && AUDIO_CODEC="copy" || AUDIO_CODEC="aac"
-	ffmpeg -i "$1" -y -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -strict -2 "$2"
+	ffmpeg -i "$1" -y -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -strict -2 "$2" < /dev/null
 }
 
 function process {
